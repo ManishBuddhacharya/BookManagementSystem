@@ -1,8 +1,8 @@
 # Book Management System
 
-It provides APIs to access available books.
+The System provides APIs to create User, add update and belete books and access available books.
 
-## Official Documentation
+## Documentation
 
 Documentation for the APIs can be found [here](https://documenter.getpostman.com/view/7178826/UVkntbFV).
 
