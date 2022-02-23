@@ -22,7 +22,7 @@ class RegisterController extends Controller
         ]);
         
         $data = $request->except('token', 'password_confirmation', 'password');
-        $data['is_admin'] = 1;
+        $data['is_admin'] = 0;
         $data['password'] = Crypt::encrypt($request->password);
         
         DB::beginTransaction();

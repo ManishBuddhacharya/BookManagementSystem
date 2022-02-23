@@ -17,6 +17,10 @@ class BookController extends Controller
 
     public function storeBook(Request $request, BookRepo $book_repo)
     {
+        if(!auth()->user()->is_admin){
+            return response(["message" => 'Not Autourized'], 401);
+        }
+        
         $this->validate($request, [
             'book_name' => ['required', 'string', 'max:255'],
             'author_name' => ['required', 'string'],
@@ -43,6 +47,10 @@ class BookController extends Controller
 
     public function updateBook(Request $request, $book, BookRepo $book_repo)
     {
+        if(!auth()->user()->is_admin){
+            return response(["message" => 'Not Autourized'], 401);
+        }
+
         $this->validate($request, [
             'book_name' => ['required', 'string', 'max:255'],
             'author_name' => ['required', 'string'],
@@ -69,8 +77,11 @@ class BookController extends Controller
 
     public function deleteBook($book, BookRepo $book_repo)
     {   
-        DB::beginTransaction();
+        if(!auth()->user()->is_admin){
+            return response(["message" => 'Not Autourized'], 401);
+        }
 
+        DB::beginTransaction();
         try {
             $book_repo->softDelete($book);
             DB::commit();
@@ -83,8 +94,11 @@ class BookController extends Controller
 
     public function destroy(Request $request, $book, BookRepo $book_repo)
     {   
-        DB::beginTransaction();
+        if(!auth()->user()->is_admin){
+            return response(["message" => 'Not Autourized'], 401);
+        }
 
+        DB::beginTransaction();
         try {
             $data = $book_repo->destroy($book);
             DB::commit();
